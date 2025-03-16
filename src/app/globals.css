@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Hyperliquid风格基础颜色 */
+  --foreground-rgb: 230, 230, 230;
+  --background-dark: 11, 11, 19;
+  --background-darker: 6, 7, 12;
+  --accent-blue: 56, 114, 250;
+  --accent-blue-hover: 78, 129, 251;
+  --accent-green: 0, 190, 126;
+  --accent-red: 241, 59, 91;
+  --panel-bg: 16, 17, 28;
+  --border-color: 35, 37, 54;
+  --input-bg: 25, 27, 44;
+  --highlight: 87, 91, 199;
+  --accent-yellow: 255, 192, 53;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    135deg,
+    rgba(var(--background-darker), 1) 0%,
+    rgba(var(--background-dark), 0.95) 100%
+  );
+  background-attachment: fixed;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+
+/* 滚动条隐藏样式 */
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE 和 Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome, Safari 和 Opera */
+}
+
+/* 按钮样式 */
+button,
+.btn {
+  @apply rounded transition-all duration-200 font-medium;
+}
+
+/* 主要按钮样式 */
+.btn-primary {
+  background-color: rgb(var(--accent-blue));
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: rgb(var(--accent-blue-hover));
+}
+
+/* 成功/多仓按钮样式 */
+.btn-success {
+  background-color: rgb(var(--accent-green));
+  color: white;
+}
+
+/* 危险/空仓按钮样式 */
+.btn-danger {
+  background-color: rgb(var(--accent-red));
+  color: white;
+}
+
+/* 卡片和面板样式 */
+.card,
+.panel {
+  background-color: rgba(var(--panel-bg), 0.8);
+  border: 1px solid rgba(var(--border-color), 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 表单元素样式 */
+input,
+select,
+textarea {
+  background-color: rgba(var(--input-bg), 0.8);
+  border: 1px solid rgba(var(--border-color), 0.7);
+  color: rgb(var(--foreground-rgb));
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(var(--highlight), 0.7);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--highlight), 0.2);
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--background-darker), 0.5);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--border-color), 0.8);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--highlight), 0.5);
+}
+
+/* 隐藏输入框上下按钮 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* 表格样式 */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  font-weight: 500;
+  text-align: left;
+  color: rgba(var(--foreground-rgb), 0.7);
+  padding: 0.75rem;
+}
+
+td {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(var(--border-color), 0.3);
+}
+
+tr:hover {
+  background-color: rgba(var(--highlight), 0.05);
+}
+
+/* 工具提示样式 */
+.tooltip {
+  position: relative;
+}
+
+.tooltip:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(var(--panel-bg), 0.95);
+  color: rgb(var(--foreground-rgb));
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(var(--border-color), 0.5);
+}
+
+.tooltip:hover:before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-0.5rem);
 }
