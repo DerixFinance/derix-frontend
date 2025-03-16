@@ -12,9 +12,11 @@ Derix 是一个去中心化的永续合约交易平台，提供高杠杆、低�
 
 ## 技术栈
 
-- **前端框架**: Next.js 14 + TypeScript + Tailwind CSS
-- **区块链交互**: ethers.js、wagmi、RainbowKit
-- **图表库**: lightweight-charts
+- **前端框架**: Next.js 15.2.2 + TypeScript + Tailwind CSS 4
+- **React**: v19.0.0
+- **区块链交互**: ethers.js v6.13.5、wagmi v2.14.13、RainbowKit v2.2.4
+- **图表库**: lightweight-charts v5.0.3
+- **数据获取**: TanStack React Query v5.68.0
 
 ## 开始使用
 
